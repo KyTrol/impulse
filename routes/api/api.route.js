@@ -1,10 +1,11 @@
-let express = require("express");
-let router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-let userRouteCreator = require("./user.route.js");
+const userRouteCreator = require("./user.route");
+const ratingRouterCreator = require("./rating.route");
 
 module.exports = (passport) => {
 	router.use("/user", userRouteCreator(passport));
-
+	router.use("/rating", ratingRouterCreator(passport));
 	return router;
 };

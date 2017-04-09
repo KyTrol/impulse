@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dbConnection = require('../db/db.js').get();
-const Rating = require('./rating.model');
 const Schema = mongoose.Schema;
+const ObjectId = require('mongoose').Types.ObjectId; 
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
@@ -52,20 +52,29 @@ UserSchema.statics.findById = function(id) {
     return this.findOne({ _id: id }).exec().then(stripPassword);
 }
 
-UserSchema.methods.rate = function(rating) {
-    return rating.save();
-};
-
-UserSchema.methods.getRatingsFor = function() {
-    return Rating.findAll({ reviewedUser: this._id }).exec();
-};
-
-UserSchema.methods.getRatingsBy = function() {
-    return Rating.findAll({ reviewingUser: this._id }).exec();
-};
-
 UserSchema.methods.comparePassword = function(candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
+};
+
+UserSchema.statics.updateInfo = function(user) {
+    
+    console.log('model', user._id)
+    
+    return this.findByIdAndUpdate(user._id,
+        {
+          '$set': {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                bio: user.bio,
+                url: user.url
+            }  
+        },
+        {
+            new: true,
+            runValidators: true,
+            setDefaultsOnInsert: true
+        }
+    ).exec();
 };
 
 UserSchema.pre('save', function(next) {

@@ -12,6 +12,7 @@ module.exports = (passport) => {
 	);
 
 	router.get("/logout",
+		isLoggedIn,
 		controller.logout
 	);
 
@@ -24,7 +25,12 @@ module.exports = (passport) => {
 		controller.signup
 	);
 	
-	router.get("/:username", 
+	router.post('/update',
+		controller.updateInfo
+	);
+	
+	router.get("/:username",
+		isLoggedIn,
 		controller.getUser
 	);
 
