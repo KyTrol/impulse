@@ -1,10 +1,10 @@
 <section class="profile">
-    <div class="side-panel">
+    <div class="side-panel block-center">
         <div class="profile-img">
              <!--<img src="assets/img/logo.svg" />-->
         </div>
         <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
-        <div *ngIf="user" class="info">
+        <div *ngIf="user" class="info shadow">
             <h3>{{user.firstName}} {{user.lastName}}</h3>
             <ul class="info">
                 <li>Username&nbsp;<span>{{user.username}}</span></li>
@@ -12,7 +12,14 @@
                 <li>Website&nbsp;<span>{{user.url || ''}}</span></li>
             </ul>
         </div>
+        <app-rating-bar></app-rating-bar>
+        <div *ngIf="ratingsFor">
+            <div *ngFor="let rating of ratingsFor" class="rating shadow">
+                <h4>Rated By {{rating.reviewingUser.username}}</h4>
+                <p>Rating: {{rating.rating}}/10</p>
+                <p>Review: {{rating.review}}</p>
+            </div>
+            
+        </div>
     </div>
-    <app-rating-bar></app-rating-bar>
-    <app-rating></app-rating>
 </section>

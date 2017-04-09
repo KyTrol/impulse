@@ -5,15 +5,16 @@
     max-width: 80rem;
     list-style-type: none;
     padding-left: 0;
-    display: flex;
-    justify-content: space-around;
 }
 
 li {
     cursor: pointer;
-    width: 4rem;
-    height: 4rem;
-    line-height: 4rem;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
     background-color: $pink;
     text-align: center;
+    padding: .4rem;
+    margin: .4rem;
 }

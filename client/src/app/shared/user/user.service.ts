@@ -69,7 +69,7 @@ export class UserService {
     
     public getUser(username: string) {
       
-      return this.http.get(USER_URL + "/" + username).map((res: Response) => {
+      return this.http.get(USER_URL + username).map((res: Response) => {
          const jsonUser = res.json();
          console.log("Got user:", jsonUser);
          return jsonUser;
@@ -107,7 +107,6 @@ export class UserService {
     	const user = res.json();
 
         if (user) {
-            //this.userLoginSource.next(user);
             return user;            
         } else { 
             return null;

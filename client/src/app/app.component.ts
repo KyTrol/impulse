@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from "rxjs/Subscription";
 
 import { UserService } from './shared/user/user.service';
 
@@ -11,20 +12,23 @@ import { UserService } from './shared/user/user.service';
 export class AppComponent implements OnInit {
   
   public title = 'Impulse';
+  private loginSub: Subscription;
   
   constructor(private userService: UserService, private router: Router) {}
   
   public ngOnInit() {
     
-    this.userService.userLogin.subscribe(user => {
-      if (user)  {
-       this.router.navigate(["/profile", user.username]);
-      } else {
-        console.log("Got login with no user...");
-      }
-    }, 
-    console.error
-    )
+    this.loginSub = this.userService.userLogin.subscribe(user => {
+        if (user)  {
+         this.router.navigate(["/profile", user.username]);
+        } else {
+          console.log("Got login with no user...");
+        }
+      }, 
+      console.error
+    );
+    
+    console.log(this.loginSub);
     
   }
 }

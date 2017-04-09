@@ -1,24 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { RatingService } from '../shared/rating/rating.service';
+import { Rating } from '../shared/rating/rating.model';
 import { UserService } from '../shared/user/user.service';
 import { User } from '../shared/user/user.model';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [ RatingService ]
 })
 
 export class ProfileComponent implements OnInit {
   public user: User;
-  public userId: string;
+  public ratingsFor: Rating[];
   public paramsSub: any;
   public errorMsg: string;
   
-  constructor(private userService: UserService, private activatedRoute: ActivatedRoute) { }
+  constructor(private userService: UserService, 
+              private ratingService: RatingService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    
+    this.getUser();
+    
+  }
+  
+  private getUser(): void {
     
     this.paramsSub = this.activatedRoute.params.subscribe(params => {
         
@@ -26,10 +37,9 @@ export class ProfileComponent implements OnInit {
         
         this.userService.getUser(username).subscribe(user => {
             if (user) {
-              console.log("User found!");
               this.user = user;
+              this.getRatings();
             } else {
-              console.log("No user found.");
               this.errorMsg = "User Profile not found.";
             }
           }, 
@@ -40,6 +50,18 @@ export class ProfileComponent implements OnInit {
       
       this.handleError
     );
+    
+  }
+  
+  private getRatings(): void {
+    
+    this.ratingService.getRatingsFor(this.user._id).subscribe(ratings => {
+      if (ratings) {
+        this.ratingsFor = ratings;
+      } else {
+        this.errorMsg = "Unable to retrieve ratings for user.";
+      }
+    });
     
   }
   

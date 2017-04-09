@@ -1,3 +1,9 @@
+USE THIS: 58ea74cccc6f1c17b6056aea
+
+
+
+
+
 http://impulse-io.mtilhlenfield.c9users.io/
 
 KyTrol: 58e9a7da243bf55bed7cd937
@@ -34,3 +40,5 @@ matthew: 58e9ad8261eca75fe4bfd40b
 </div>
 
 http://stackoverflow.com/questions/35243443/pre-bootstrap-loading-screen-for-angular2
+
+Impulse is a social networking website that we see as a small step toward a society in which a person's value and influence is not at all influenced by race, religion, gender, or sexual orientation and is instead determined entirely by a simple community rating system over which we have complete and unregulated control
