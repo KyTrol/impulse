@@ -15,6 +15,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { SignupComponent } from './shared/signup/signup.component';
 import { EditprofileComponent } from './shared/editprofile/editprofile.component';
 import { RatingComponent } from './shared/rating/rating.component';
+import { RatingBarComponent } from './shared/rating/rating-bar/rating-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RatingComponent } from './shared/rating/rating.component';
     LoginComponent,
     SignupComponent,
     EditprofileComponent,
-    RatingComponent
+    RatingComponent,
+    RatingBarComponent
   ],
   imports: [
     BrowserModule,

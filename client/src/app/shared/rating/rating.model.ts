@@ -6,6 +6,7 @@ export interface Rating {
     rating: number,
     reviewingUser: User,
     reviewedUser: User,
-    review: string
+    review?: string,
+    created: string
     
 }

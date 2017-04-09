@@ -5,12 +5,55 @@ form {
     padding: 1rem;
     font-family: inherit;
     font-size: 2rem;
+    
+    & > p {
+        font-size: .8em;
+    }
+    
+    & > input {
+        height: 3.8rem;
+    }
+    
+    & > button {
+        display: block;
+        border: 0;
+        background-color: $pink;
+        width: 35%;
+        height: 4rem;
+        font-size: inherit;
+        color: $grey-100;
+        font-family: inherit;
+        transition: all 200ms $swift;
+        cursor: pointer;
+    }
 }
 
 input {
     font-size: .8em;
     width: 90%;
     font-family: inherit;
-    margin-top: 1.6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.6rem;
+    box-sizing: border-box;
+}
+
+.error {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    color: $pink;
+    background-color: $pink-50;
+    border-left: .3rem solid $pink;
+    border-right: .3rem solid $pink;
+    padding: .8rem;
+    font-size: .8em;
+}
+
+.ng-invalid:not(form):not(.ng-pristine) {
+  border-left: .3rem solid $pink;
+  border-right: .3rem solid $pink;
+}
+
+.ng-valid:not(form).ng-dirty {
+  border-left: .3rem solid $green;
+  border-right: .3rem solid $green;
 }

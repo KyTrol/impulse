@@ -10,6 +10,8 @@ let sendIndex = (req, res) => {
 
 router.get("/", sendIndex);
 router.get("/home", sendIndex);
+router.get("/home/login", sendIndex);
+router.get("/home/signup", sendIndex);
 router.get("/profile/:id", sendIndex);
 
 module.exports = router;

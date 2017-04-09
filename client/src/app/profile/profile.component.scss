@@ -1,0 +1,20 @@
+@import '../../partials/_variables';
+
+.profile-img {
+    width: 5em;
+    height: 5em;
+}
+
+.profile {
+    font-size: 2rem;
+    padding: .8rem;
+}
+
+.info {
+    list-style-type: none;
+    padding-left: 0;
+    
+    span {
+        color: $pink;
+    }
+}

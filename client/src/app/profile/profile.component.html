@@ -1,3 +1,18 @@
-<p>
-  profile works!
-</p>
+<section class="profile">
+    <div class="side-panel">
+        <div class="profile-img">
+             <!--<img src="assets/img/logo.svg" />-->
+        </div>
+        <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
+        <div *ngIf="user" class="info">
+            <h3>{{user.firstName}} {{user.lastName}}</h3>
+            <ul class="info">
+                <li>Username&nbsp;<span>{{user.username}}</span></li>
+                <li>Bio&nbsp;<span>{{user.bio || ''}}</span></li>
+                <li>Website&nbsp;<span>{{user.url || ''}}</span></li>
+            </ul>
+        </div>
+    </div>
+    <app-rating-bar></app-rating-bar>
+    <app-rating></app-rating>
+</section>

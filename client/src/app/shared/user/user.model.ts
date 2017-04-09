@@ -5,8 +5,9 @@ export interface User {
     lastName: string,
     username: string,
     avgRating: number,
-    bio: string,
-    url: string,
-    created: Date
+    bio?: string,
+    url?: string,
+    __v?: number,
+    created: string
     
 }

@@ -1,5 +1,36 @@
+@import '../../../partials/_variables';
+
 form {
     display: inline-block;
     font-family: inherit;
+    font-size: 2rem;
+    margin-top: .4rem;
+    display: flex;
+    margin-right: .8rem;
+}
+
+input {
+    height: 3.8rem;
+    vertical-align: top;
+    
+    &:focus {
+        outline: 0;
+    }
+}
+
+button {
+    border: 0;
+    height: 3.8rem;
+    width: 3.8rem;
+    background-color: $grey-50;
+    cursor: pointer;
+    
+    &:focus {
+        outline: 0;
+    }
+}
+
+.material-icons {
+    color: $grey-700;
 }
 

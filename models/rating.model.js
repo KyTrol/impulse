@@ -64,6 +64,11 @@ RatingSchema.statics.insertRating = function(rating) {
     });
 };
 
+function calculateActualRating(newRating, userAvarage) {
+    const scale = (userAvarage - 5) * 0.06666;
+    return (newRating * (1 + scale));
+}
+
 function calculateAverage(count, average, newVal, raterAverage) {
     
     average = average < 0 ? 0 : average;
@@ -71,7 +76,7 @@ function calculateAverage(count, average, newVal, raterAverage) {
     if (raterAverage <= 5) {
         return average + ((newVal - average)/(count + 1));
     } else if (raterAverage <= 20) {
-        const scale = (20 - 5) * 0.133333;
+        const scale = (newVal - 5) * 0.06666;
         return average + (((newVal * (1 + scale)) - average)/(count + 1));
     } else {
         console.error("What?");

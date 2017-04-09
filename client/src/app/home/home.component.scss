@@ -2,11 +2,15 @@
 
 .home {
     padding: 1.6rem;
-    
+    font-size: 2rem;
+    max-width: 80rem;    
     h1 {
         color: $pink;
-        font-size: 4em;
+        font-size: 2em;
         text-align: center;
     }
 }
 
+.tag {
+    font-size: 1.2em;
+}

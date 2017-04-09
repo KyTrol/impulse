@@ -31,21 +31,12 @@ input,
 textarea {
     background-color: $grey-50;
     color: $grey-700;
-    padding: .4rem;
+    padding: .4rem .4rem .4rem .8rem;
     border: 0;
 }
 
 textarea {
     resize: none;
-}
-
-
-input,
-textarea {
-    &:focus {
-        outline: 0;
-        border: 1px solid $pink;
-    }
 }
 
 a {
@@ -61,4 +52,32 @@ a {
 .heading {
     font-weight: $light;
     letter-spacing: 2px;
+}
+
+.shadow {
+    box-shadow: $shadow
+}
+
+[disabled] {
+    opacity: .54;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.loading {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20rem;
+    height: 20rem;
+    margin-left: -10rem;
+    margin-right: -10rem;
+}
+
+@keyframes loader {
+    0% {
+    }
 }

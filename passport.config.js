@@ -33,7 +33,7 @@ passport.deserializeUser((id, done) => {
 		if (user) {
 			done(null, user);
 		} else {
-			done(null, false);
+			done({ errorMessage: "Invalid username or password." }, false);
 		}		
 	}).catch(function(err) {
 		console.error(err);

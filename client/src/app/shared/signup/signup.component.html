@@ -1,28 +1,55 @@
-<div>
+<div class="shadow signup">
     
     <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)" class="block-center center">
         <h3 class="capital heading">Sign Up</h3>
         
+         <div *ngIf="errorMsg">
+            <span class="error">{{errorMsg}}</span>
+        </div>
+        
+        <div class="error border-box left"
+			*ngIf="signupForm.get('firstName').hasError('required') && signupForm.get('firstName').touched">
+			<span>First name is required.</span>
+        </div>
         <input type="text" name="firstName" maxlength="25" minlength="2" class="left"
         [formControl]="signupForm.controls.firstName" placeholder="First Name"/>
         
-        
+        <div class="error border-box left"
+			*ngIf="signupForm.get('lastName').hasError('required') && signupForm.get('lastName').touched">
+			<span>Last name is required.</span>
+        </div>
         <input type="text" name="lastName" maxlength="35" minlength="2" class="left"
         [formControl]="signupForm.controls.lastName" placeholder="Last Name"/>
         
-        
+        <div class="error border-box left"
+			*ngIf="signupForm.get('username').hasError('required') && signupForm.get('username').touched">
+			<span>Username is required.</span>
+        </div>
         <input type="text" name="username" maxlength="40" minlength="3" class="left"
         [formControl]="signupForm.controls.username" placeholder="Username"/>
         
-        
-        <input type="text" name="password" maxlength="40" minlength="8" class="left"
+        <div class="error border-box left"
+			*ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">
+			<span>Password is required.</span>
+        </div>
+        <input type="text" name="password" maxlength="40" minlength="8" class="left" type="password"
         [formControl]="signupForm.controls.password" placeholder="Password"/>
         
-        
-        <input type="text" name="confirmPassword" maxlength="40" minlength="8" class="left"
+        <div class="error border-box left"
+			*ngIf="signupForm.get('confirmPassword').hasError('required') && signupForm.get('confirmPassword').touched">
+			<span>Confirmation password is required.</span>
+        </div>
+        <input type="text" name="confirmPassword" maxlength="40" minlength="8" class="left" type="password"
         [formControl]="signupForm.controls.confirmPassword" placeholder="Confirm Password"/>
         
-        <p>Already have an account? Log in <a>here</a>.</p>
+        <!--
+        <div *ngIf="(signupForm.get('password') !== signupForm.get('confirmPassword')) && signupForm.get('password').touched && signupForm.get('confirmPassword').touched">
+            <span class="error">Passwords do not match</span>
+        </div>
+        -->
+        <button [disabled]="!signupForm.valid" type="submit" class="block-center capital shadow">Submit</button>
+        
+        <p>Already have an account? Log in <a routerLink='/home/login'>here</a>.</p>
         
         
     </form>
