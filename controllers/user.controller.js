@@ -19,7 +19,6 @@ class UserController {
     }
     
     signup(req, res, err) {
-        
         if (req.body.firstName && req.body.lastName && req.body.username && req.body.password && req.body.confirmPassword) {
             if (req.body.password === req.body.confirmPassword) {
                 //const whiteList = /[^a-zA-Z0-9]/g;
@@ -34,12 +33,19 @@ class UserController {
                             password: req.body.password
                         });
                         
-                        user.save().then(function(user) {
+                        User.signup(user).then(user => {
                             res.send(user);
                         }).catch(function(err) {
                             console.error(err);
                             sendInternalServerError(res);
-                        });
+                        })
+                        
+                        /*user.save().then(function(user) {
+                            res.send(user);
+                        }).catch(function(err) {
+                            console.error(err);
+                            sendInternalServerError(res);
+                        });*/
                     } else {
                         sendBadRequest(res, 'Username already taken.');
                     }

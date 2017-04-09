@@ -1,3 +1,31 @@
-<p>
-  signup works!
-</p>
+<div>
+    
+    <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)" class="block-center center">
+        <h3 class="capital heading">Sign Up</h3>
+        
+        <input type="text" name="firstName" maxlength="25" minlength="2" class="left"
+        [formControl]="signupForm.controls.firstName" placeholder="First Name"/>
+        
+        
+        <input type="text" name="lastName" maxlength="35" minlength="2" class="left"
+        [formControl]="signupForm.controls.lastName" placeholder="Last Name"/>
+        
+        
+        <input type="text" name="username" maxlength="40" minlength="3" class="left"
+        [formControl]="signupForm.controls.username" placeholder="Username"/>
+        
+        
+        <input type="text" name="password" maxlength="40" minlength="8" class="left"
+        [formControl]="signupForm.controls.password" placeholder="Password"/>
+        
+        
+        <input type="text" name="confirmPassword" maxlength="40" minlength="8" class="left"
+        [formControl]="signupForm.controls.confirmPassword" placeholder="Confirm Password"/>
+        
+        <p>Already have an account? Log in <a>here</a>.</p>
+        
+        
+    </form>
+    
+    
+</div>

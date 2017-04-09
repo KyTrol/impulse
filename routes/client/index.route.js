@@ -9,9 +9,7 @@ let sendIndex = (req, res) => {
 };
 
 router.get("/", sendIndex);
-router.get("/login", sendIndex);
 router.get("/home", sendIndex);
 router.get("/profile/:id", sendIndex);
-router.get("/signup", sendIndex);
 
 module.exports = router;

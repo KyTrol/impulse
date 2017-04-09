@@ -16,7 +16,7 @@ module.exports = (passport) => {
 		controller.logout
 	);
 
-	router.post("/auth",
+	router.get("/auth",
 		isLoggedIn,
 		controller.login
 	);

@@ -29,7 +29,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
 
-	let user = User.findById(id).then(function(user) {
+	let user = User.findByUserId(id).then(function(user) {
 		if (user) {
 			done(null, user);
 		} else {

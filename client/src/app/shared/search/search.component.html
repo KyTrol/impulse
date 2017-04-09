@@ -1,3 +1,4 @@
-<p>
-  search works!
-</p>
+<form [formGroup]="searchForm" (ngSubmit)="search(searchForm.value)">
+    <input autocomplete="off" autocapitalize="off" spellcheck="off" class="search" placeholder="Search" name="query" 
+    [formControl]="searchForm.controls.query"/>    
+</form>

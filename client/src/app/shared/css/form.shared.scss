@@ -1,0 +1,16 @@
+@import '../../../partials/_variables';
+
+form {
+    background-color: $grey-300;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 2rem;
+}
+
+input {
+    font-size: .8em;
+    width: 90%;
+    font-family: inherit;
+    margin-top: 1.6rem;
+    margin-bottom: 1rem;
+}

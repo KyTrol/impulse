@@ -19,7 +19,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "partials/_normalize.scss",
+        "styles.scss",
+        "partials/_rubik.scss",
+        "partials/_material-icons.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

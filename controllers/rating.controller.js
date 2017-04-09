@@ -27,7 +27,6 @@ class RatingController {
         if (req.params.userId) {
             
             Rating.getRatingsFor(req.params.userId).then(ratings => {
-                console.log("Ratings:", ratings);
                 if (ratings) {
                     res.send(ratings);
                 } else {
@@ -47,7 +46,6 @@ class RatingController {
         if (req.params.userId) {
             
             Rating.getRatingsBy(req.params.userId).then(ratings => {
-                console.log("Ratings:", ratings);
                 if (ratings) {
                     res.send(ratings);
                 } else {

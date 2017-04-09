@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
+import { UserService } from './shared/user/user.service';
+
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { SearchComponent } from './shared/search/search.component';
@@ -15,6 +19,7 @@ import { RatingComponent } from './shared/rating/rating.component';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     ProfileComponent,
     NavComponent,
     SearchComponent,
@@ -26,9 +31,12 @@ import { RatingComponent } from './shared/rating/rating.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

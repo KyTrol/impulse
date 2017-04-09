@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+@import './partials/_variables';
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    background-color: $grey-700;
+    color: $grey-100;
+    font-family: 'Rubik', sans-serif;
+}
+
+.capital { text-transform: uppercase; }
+
+.center { text-align: center; };
+.right { text-align: right; };
+.left { text-align: left; };
+
+.block-center { 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hide {
+    opacity: 0;
+}
+
+input, 
+textarea {
+    background-color: $grey-50;
+    color: $grey-700;
+    padding: .4rem;
+    border: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+
+input,
+textarea {
+    &:focus {
+        outline: 0;
+        border: 1px solid $pink;
+    }
+}
+
+a {
+    color: $pink;
+    text-decoration: none;
+    
+    &:visited {
+        text-decoration: underline;
+        color: $dark-pink;
+    }
+}
+
+.heading {
+    font-weight: $light;
+    letter-spacing: 2px;
+}
