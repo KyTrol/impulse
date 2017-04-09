@@ -9,6 +9,8 @@ const User = require('./models/user.model');
 passport.use(new Strategy((username, password, done) => {
 
 	User.login(username, password).then(function(user) {
+		console.log("")
+		
 		if (user) {
 			done(null, user);
 		} else { 
@@ -27,7 +29,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
 
-	let user = User.findUserById(id).then(function(user) {
+	let user = User.findById(id).then(function(user) {
 		if (user) {
 			done(null, user);
 		} else {

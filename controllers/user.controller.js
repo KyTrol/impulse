@@ -1,4 +1,4 @@
-const User = require("../models/user.model");
+const User = require('../models/user.model');
 
 class UserController {
     
@@ -8,72 +8,77 @@ class UserController {
             res.send(req.user);
         } else {
             res.status(401);
-            res.send({errorMessage: "Invalid username or password."});
+            res.send({errorMessage: 'Invalid username or password.'});
         }
 
     }
     
     logout(req, res, err) {
-        res.send('logout');
+        req.logout();
+        res.sendStatus(200);
     }
     
     signup(req, res, err) {
         
-        console.log("Signup called.");
-        console.log(req.body.username);
-        console.log(req.body);
-        console.log(req.params);
-        
         if (req.body.firstName && req.body.lastName && req.body.username && req.body.password && req.body.confirmPassword) {
-            console.log("Required params exist.");
             if (req.body.password === req.body.confirmPassword) {
-                console.log("Passwords match.");
                 //const whiteList = /[^a-zA-Z0-9]/g;
                 
                 User.findByUsername(req.body.username).then(function(user) {
                    
                     if (!user) {
-                        console.log("Username fine.");
                         const user = new User({
                             firstName: req.body.firstName,
                             lastName: req.body.lastName,
-                            username: req.body.username,
+                            username: req.body.username.toLowerCase(),
                             password: req.body.password
                         });
                         
-                        user.save(function(user) {
-                            console.log("User saved.");
+                        user.save().then(function(user) {
                             res.send(user);
                         }).catch(function(err) {
                             console.error(err);
                             sendInternalServerError(res);
                         });
                     } else {
-                        sendBadRequest('Username already taken.');
+                        sendBadRequest(res, 'Username already taken.');
                     }
                     
                 }).catch(function(err) {
-                    console.error(err);
                     sendInternalServerError(res);
                 });
                 
             } else {
-                sendBadRequest(res, "Passwords did not match.");
+                sendBadRequest(res, 'Passwords did not match.');
             }
         } else {
-            sendBadRequest(res, "Missing parameters.");
+            sendBadRequest(res, 'Missing parameters.');
         }
     }
     
-    auth(req, res, err) {
-        res.send("auth");
+    getUser(req, res, err) {
+        const username = req.params.username.toLowerCase();
+
+        if (username) {
+            User.findByUsername(username).then(user => {
+                
+                if (user) {
+                    res.send(user);
+                } else {
+                    res.status(404);
+                    res.send({ errorMessage: "User not found." });
+                }
+                
+            }); 
+        }
+        
     }
     
 }
 
 function sendInternalServerError(res) {
     res.status(500);
-    res.send({errorMessage: "Internal server error."});
+    res.send({errorMessage: 'Internal server error.'});
 }
 
 function sendBadRequest(res, message) {

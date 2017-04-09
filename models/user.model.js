@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dbConnection = require('../db/db.js').get();
 const Rating = require('./rating.model');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
@@ -16,30 +17,39 @@ const UserSchema = new Schema({
 });
 
 UserSchema.statics.login = function(username, password) {
-    const user = this.findOne({username: username});
-    
-    if (user) {
-        return user.comparePassword(password).then(function(isMatch) {
-            
-            return isMatch ? stripPassword(user) : null;
-            
-        });
-    } else {
-        return Promise.resolve(null);
-    }
-    
+    return this.findOne({username: username.toLowerCase()}).exec().then(function(user) {
+        if (user) {
+            return user.comparePassword(password).then(function(isMatch) {
+                
+                return isMatch ? stripPassword(user) : null;
+                
+            });
+        } else {
+            return Promise.resolve(null);
+        }  
+    });
 };
 
 UserSchema.statics.signup = function(user) {
+    user.username = user.username.toLowerCase();
     return user.save();
 };
 
 UserSchema.statics.findByUsername = function(username) {
-    return this.findOne({ username: username }).then(stripPassword);
+    return this.findOne({ username: username.toLowerCase() }).exec().then(function(user) {
+        
+        if (user) {
+            return stripPassword(user);
+        } else {
+            //console.log('findbyUserName', user);
+            return null;
+        }
+        
+    });
 };
 
 UserSchema.statics.findById = function(id) {
-    return this.findOne({ _id: id }).then(stripPassword);
+    return this.findOne({ _id: id }).exec().then(stripPassword);
 }
 
 UserSchema.methods.rate = function(rating) {
@@ -47,11 +57,11 @@ UserSchema.methods.rate = function(rating) {
 };
 
 UserSchema.methods.getRatingsFor = function() {
-    return Rating.findAll({ reviewedUser: this._id });
+    return Rating.findAll({ reviewedUser: this._id }).exec();
 };
 
 UserSchema.methods.getRatingsBy = function() {
-    return Rating.findAll({ reviewingUser: this._id });
+    return Rating.findAll({ reviewingUser: this._id }).exec();
 };
 
 UserSchema.methods.comparePassword = function(candidatePassword) {
@@ -80,6 +90,7 @@ UserSchema.pre('save', function(next) {
 });
 
 function stripPassword(user) {
+    
     if (user) {
         delete user.password;
         return user;
@@ -88,4 +99,4 @@ function stripPassword(user) {
     }
 }
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = dbConnection.model('User', UserSchema);

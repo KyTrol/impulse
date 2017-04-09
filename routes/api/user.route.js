@@ -24,19 +24,22 @@ module.exports = (passport) => {
 		controller.signup
 	);
 	
-	router.post("/test", function(req, res, err) {
-		res.send("It works.");
-	});
+	router.get("/:username", 
+		controller.getUser
+	);
 
 	return router;
 };
 
 function isLoggedIn(req, res, next) {
-
+	
+	console.log("Checking if logged in.");
+	console.log("Is logged in:", req.isAuthenticated());
+	
 	if (req.isAuthenticated()) {
 		return next();
 	} else {
-		res.status(401);
+		res.sendStatus(401);
 	}
 
 }
