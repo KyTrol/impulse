@@ -8,6 +8,4 @@ import { Routes } from '@angular/router';
     styleUrls: [ './home.component.scss' ]
 })
 
-export class HomeComponent {
-    
-}
+export class HomeComponent {}

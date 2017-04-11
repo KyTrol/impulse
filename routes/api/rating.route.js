@@ -1,22 +1,22 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const RatingController = require("../../controllers/rating.controller");
+const RatingController = require('../../controllers/rating.controller');
 
 module.exports = (passport) => {
 
-	const controller = new RatingController();
+  const controller = new RatingController();
 
-    router.get("/for/:userId", 
-        controller.getRatingsFor
-    );
-    
-    router.get('/by/:userId',
-		controller.getRatingsBy   
-    );
-    
-    router.post('/', 
-        controller.rate
-    );
+  router.get('/for/:userId',
+    controller.getRatingsFor
+  );
 
-	return router;
+  router.get('/by/:userId',
+    controller.getRatingsBy
+  );
+
+  router.post('/',
+    controller.rate
+  );
+
+  return router;
 };

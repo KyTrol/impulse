@@ -10,9 +10,9 @@ import { UserService } from '../user/user.service';
 
 export class SignupComponent implements OnInit {
   public signupForm: FormGroup;
-  public submitted: boolean = false;
+  public submitted = false;
   public errorMsg: String;
-  
+
   constructor(private userService: UserService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -24,19 +24,20 @@ export class SignupComponent implements OnInit {
       confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
     });
   }
-  
+
   signup(values) {
-    
+
     this.userService.signup(values.firstName, values.lastName, values.username, values.password, values.confirmPassword)
         .subscribe(user => {
-          console.log(user),
-          this.handleSignInError
-        });
-    
+          console.log(user);
+        },
+        this.handleSignInError
+      );
+
   }
-  
+
   handleSignInError(err): void {
-    this.errorMsg = "Error occured while attempting to sign up.";
+    this.errorMsg = 'Error occured while attempting to sign up.';
   }
 
 }

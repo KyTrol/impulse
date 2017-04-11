@@ -9,20 +9,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
-  submitted: boolean = false;
+  submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder) {
     this.searchForm = formBuilder.group({
-      query: ['', Validators.required ]
+      query: ['', Validators.required]
     });
   }
 
   search(value): void {
-    
+
   }
-  
+
   ngOnInit() {
-    
+
   }
 
 }

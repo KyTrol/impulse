@@ -9,12 +9,12 @@ import { LoginComponent } from './shared/login/login.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', 
+    { path: 'home',
       component: HomeComponent,
-      children: [ 
+      children: [
         { path: '', component: SignupComponent, pathMatch: 'full' },
         { path: 'signup', component: SignupComponent },
-        { path: 'login', component: LoginComponent }    
+        { path: 'login', component: LoginComponent }
       ]
     },
     { path: 'profile/:username', component: ProfileComponent }

@@ -19,32 +19,36 @@ const passport = require('./passport.config.js');
 app.use(logger('dev'));
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(expressSession({
   secret: config.session.secret,
-	resave: config.session.resave,
-	saveUninitialized: config.session.saveUninitialized,
-	httpOnly: config.session.httpOnly,
-  store: new MongoStore({ mongooseConnection: dbConnection })
+  resave: config.session.resave,
+  saveUninitialized: config.session.saveUninitialized,
+  httpOnly: config.session.httpOnly,
+  store: new MongoStore({
+    mongooseConnection: dbConnection
+  })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const router = require("./routes/router.js")(passport);
+const router = require('./routes/router.js')(passport);
 
-const node_modules = "./client/node_modules";
-const dist = "./client/dist";
+const node_modules = './client/node_modules';
+const dist = './client/dist';
 
-app.use("/node_modules", express.static(path.join(__dirname, node_modules)));
-app.use("/api", router.api);
+app.use('/node_modules', express.static(path.join(__dirname, node_modules)));
+app.use('/api', router.api);
 
 // angular2 app
-app.use("/", express.static(path.join(__dirname, dist)));
+app.use('/', express.static(path.join(__dirname, dist)));
 
 // angular2 routes that have different urls but all map to index.html
-app.use("/", router.client);
+app.use('/', router.client);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
