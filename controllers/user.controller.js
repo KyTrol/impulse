@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const utils = require('./utils.js');
 
 class UserController {
 
@@ -39,29 +40,29 @@ class UserController {
               res.send(user);
             }).catch(function(err) {
               console.error(err);
-              sendInternalServerError(res);
+              utils.sendInternalServerError(res);
             })
 
             /*user.save().then(function(user) {
                 res.send(user);
             }).catch(function(err) {
                 console.error(err);
-                sendInternalServerError(res);
+                utils.sendInternalServerError(res);
             });*/
           } else {
-            sendBadRequest(res, 'Username already taken.');
+            utils.sendBadRequest(res, 'Username already taken.');
           }
 
         }).catch(function(err) {
           console.error(err);
-          sendInternalServerError(res);
+          utils.sendInternalServerError(res);
         });
 
       } else {
-        sendBadRequest(res, 'Passwords did not match.');
+        utils.sendBadRequest(res, 'Passwords did not match.');
       }
     } else {
-      sendBadRequest(res, 'Missing parameters.');
+      utils.sendBadRequest(res, 'Missing parameters.');
     }
   }
 
@@ -89,8 +90,6 @@ class UserController {
 
     if (req.body.firstName && req.body.lastName && req.body.bio && req.body.url) {
 
-      console.log('controller', req.user._id);
-
       const user = new User({
         _id: req.user._id,
         firstName: req.body.firstName,
@@ -100,35 +99,20 @@ class UserController {
       });
 
       User.updateInfo(user).then(user => {
-        console.log('user', user);
         res.send(user);
-
       }).catch(err => {
         console.error(err);
-        sendInternalServerError(res);
+        utils.sendInternalServerError(res);
       });
 
     } else {
-      sendBadRequest(res, 'Missing parameters.');
+      utils.sendBadRequest(res, 'Missing parameters.');
     }
 
   }
 
 }
 
-function sendInternalServerError(res) {
-  res.status(500);
-  res.send({
-    errorMessage: 'Internal server error.'
-  });
-}
-
-function sendBadRequest(res, message) {
-  res.status(400);
-  res.send({
-    errorMessage: message
-  });
-}
 
 
 module.exports = UserController;

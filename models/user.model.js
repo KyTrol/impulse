@@ -83,7 +83,6 @@ UserSchema.statics.signup = function(user) {
   user.username = user.username.toLowerCase();
   return user.save().then(user => {
     const newUser = stripPassword(user);
-    console.log(newUser);
     return stripPassword(newUser);
   });
 };
@@ -96,7 +95,6 @@ UserSchema.statics.findByUsername = function(username) {
     if (user) {
       return stripPassword(user);
     } else {
-      //console.log('findbyUserName', user);
       return null;
     }
 

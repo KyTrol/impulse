@@ -3,14 +3,9 @@ const Strategy = require('passport-local').Strategy;
 
 const User = require('./models/user.model');
 
-// For reference:
-// https://github.com/passport/express-4.x-local-example/blob/master/server.js
-
 passport.use(new Strategy((username, password, done) => {
 
   User.login(username, password).then(function(user) {
-    console.log('')
-
     if (user) {
       done(null, user);
     } else {

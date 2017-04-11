@@ -1,4 +1,5 @@
 const Rating = require('../models/rating.model.js');
+const utils = require('./utils.js');
 
 class RatingController {
 
@@ -15,10 +16,10 @@ class RatingController {
         res.send(rating);
       }).catch(err => {
        console.error('error', err);
-       sendInternalServerError(res);
+       utils.sendInternalServerError(res);
       });
     } else {
-      sendBadRequest(res, "Missing parameters.");
+      utils.sendBadRequest(res, 'Missing parameters.');
     }
 
   }
@@ -34,11 +35,11 @@ class RatingController {
         }
       }).catch(err => {
         console.error('error', err);
-        sendInternalServerError(res);
+        utils.sendInternalServerError(res);
       });
 
     } else {
-      sendBadRequest(res, "Missing user id.");
+      utils.sendBadRequest(res, 'Missing user id.');
     }
   }
 
@@ -52,24 +53,15 @@ class RatingController {
         }
       }).catch(err => {
         console.error('error', err);
-        sendInternalServerError(res);
+        utils.sendInternalServerError(res);
       });
 
     } else {
-      sendBadRequest(res, "Missing user id.");
+      utils.sendBadRequest(res, 'Missing user id.');
     }
   }
 
 }
 
-function sendInternalServerError(res) {
-  res.status(500);
-  res.send({errorMessage: 'Internal server error.'});
-}
-
-function sendBadRequest(res, message) {
-  res.status(400);
-  res.send({errorMessage: message});
-}
 
 module.exports = RatingController
