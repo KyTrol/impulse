@@ -1,15 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
 @import './partials/_variables';
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    margin: 0;
-    background-color: $grey-700;
-    color: $grey-100;
-    font-family: 'Rubik', sans-serif;
+  background-color: $grey-700;
+  color: $grey-100;
+  font-family: 'Rubik', sans-serif;
+  margin: 0;
 }
 
 .capital { text-transform: uppercase; }
@@ -18,66 +17,45 @@ body {
 .right { text-align: right; };
 .left { text-align: left; };
 
-.block-center { 
-    margin-left: auto;
-    margin-right: auto;
+.block-center {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hide {
-    opacity: 0;
+  opacity: 0;
 }
 
-input, 
+input,
 textarea {
-    background-color: $grey-50;
-    color: $grey-700;
-    padding: .4rem .4rem .4rem .8rem;
-    border: 0;
-}
-
-textarea {
-    resize: none;
+  background-color: $grey-50;
+  border: 0;
+  color: $grey-700;
+  padding: .4rem .4rem .4rem .8rem;
 }
 
 a {
-    color: $pink;
-    text-decoration: none;
-    
-    &:visited {
-        text-decoration: underline;
-        color: $dark-pink;
-    }
+  color: $pink;
+
+  &:visited {
+    color: $dark-pink;
+    text-decoration: underline;
+  }
 }
 
 .heading {
-    font-weight: $light;
-    letter-spacing: 2px;
+  font-weight: $light;
+  letter-spacing: 2px;
 }
 
 .shadow {
-    box-shadow: $shadow
+  box-shadow: $shadow
 }
 
 [disabled] {
-    opacity: .54;
+  opacity: .54;
 }
 
 .border-box {
-    box-sizing: border-box;
-}
-
-.loading {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20rem;
-    height: 20rem;
-    margin-left: -10rem;
-    margin-right: -10rem;
-}
-
-@keyframes loader {
-    0% {
-    }
+  box-sizing: border-box;
 }

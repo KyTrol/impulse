@@ -6,13 +6,13 @@
       Unable to login: {{errorMsg}}
     </div>
 
-    <div class="error border-box left" *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">
+    <div class="error border-box left" *ngIf="loginForm.get('username').hasError('required') && !loginForm.get('username').pristine">
       <span>Username is required.</span>
     </div>
     <input [formControl]="loginForm.controls.username" type="text" placeholder="Username" class="left" name="username" />
 
 
-    <div class="error border-box left" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+    <div class="error border-box left" *ngIf="loginForm.get('password').hasError('required') && !loginForm.get('password').pristine">
       <span>Password is required.</span>
     </div>
     <input [formControl]="loginForm.controls.password" type="password" name="password" placeholder="Password" class="left" />
@@ -20,6 +20,6 @@
 
     <button [disabled]="!loginForm.valid" type="submit" class="block-center capital shadow">Login</button>
 
-    <p>Don't an account? Sign up <a routerLink='/home/signup'>here</a>.</p>
+    <p>Don't have an account? Sign up <a routerLink='/home/signup'>here</a>.</p>
   </form>
 </div>

@@ -1,16 +1,16 @@
 @import '../../partials/_variables';
 
 .home {
-    padding: 1.6rem;
-    font-size: 2rem;
-    max-width: 80rem;    
-    h1 {
-        color: $pink;
-        font-size: 2em;
-        text-align: center;
-    }
+  font-size: 2rem;
+  max-width: 80rem;
+  padding: 1.6rem;
+
+  h1 {
+    color: $pink;
+    font-size: 2em;
+  }
 }
 
 .tag {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }

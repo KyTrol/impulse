@@ -425,3 +425,16 @@ template {
 [hidden] {
   display: none;
 }
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+textarea {
+  resize: none;
+}

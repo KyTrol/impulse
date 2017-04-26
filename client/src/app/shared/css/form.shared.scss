@@ -1,59 +1,58 @@
 @import '../../../partials/_variables';
+@import '../../../partials/_mixins';
 
 form {
-    background-color: $grey-300;
-    padding: 1rem;
+  background-color: $grey-300;
+  font-family: inherit;
+  padding: 1rem;
+  font-size: 2rem;
+
+  & > p {
+    font-size: 1.6rem;
+  }
+
+  & > input {
+    height: 3.8rem;
+  }
+
+  & > button {
+    background-color: $pink;
+    border: 0;
+    color: $grey-100;
+    cursor: pointer;
     font-family: inherit;
-    font-size: 2rem;
-    
-    & > p {
-        font-size: .8em;
-    }
-    
-    & > input {
-        height: 3.8rem;
-    }
-    
-    & > button {
-        display: block;
-        border: 0;
-        background-color: $pink;
-        width: 35%;
-        height: 4rem;
-        font-size: inherit;
-        color: $grey-100;
-        font-family: inherit;
-        transition: all 200ms $swift;
-        cursor: pointer;
-    }
+    font-size: inherit;
+    display: block;
+    height: 4rem;
+    width: 35%;
+    transition: all 200ms $swift;
+  }
 }
 
 input {
-    font-size: .8em;
-    width: 90%;
-    font-family: inherit;
-    margin-bottom: 1.6rem;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  font-family: inherit;
+  margin-bottom: 1.6rem;
+  width: 90%;
 }
 
 .error {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    color: $pink;
-    background-color: $pink-50;
-    border-left: .3rem solid $pink;
-    border-right: .3rem solid $pink;
-    padding: .8rem;
-    font-size: .8em;
+  @include validation-border($pink);
+
+  background-color: $pink-50;
+  color: $pink;
+  font-size: 1.6rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .8rem;
+  width: 90%;
 }
 
 .ng-invalid:not(form):not(.ng-pristine) {
-  border-left: .3rem solid $pink;
-  border-right: .3rem solid $pink;
+  @include validation-border($pink);
 }
 
 .ng-valid:not(form).ng-dirty {
-  border-left: .3rem solid $green;
-  border-right: .3rem solid $green;
+  @include validation-border($green);
 }

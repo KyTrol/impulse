@@ -7,27 +7,27 @@
       <span class="error">{{errorMsg}}</span>
     </div>
 
-    <div class="error border-box left" *ngIf="signupForm.get('firstName').hasError('required') && signupForm.get('firstName').touched">
+    <div class="error border-box left" *ngIf="signupForm.get('firstName').hasError('required') && !signupForm.get('firstName').pristine">
       <span>First name is required.</span>
     </div>
     <input type="text" name="firstName" maxlength="25" minlength="2" class="left" [formControl]="signupForm.controls.firstName" placeholder="First Name" />
 
-    <div class="error border-box left" *ngIf="signupForm.get('lastName').hasError('required') && signupForm.get('lastName').touched">
+    <div class="error border-box left" *ngIf="signupForm.get('lastName').hasError('required') && !signupForm.get('lastName').pristine">
       <span>Last name is required.</span>
     </div>
     <input type="text" name="lastName" maxlength="35" minlength="2" class="left" [formControl]="signupForm.controls.lastName" placeholder="Last Name" />
 
-    <div class="error border-box left" *ngIf="signupForm.get('username').hasError('required') && signupForm.get('username').touched">
+    <div class="error border-box left" *ngIf="signupForm.get('username').hasError('required') && !signupForm.get('username').pristine">
       <span>Username is required.</span>
     </div>
     <input type="text" name="username" maxlength="40" minlength="3" class="left" [formControl]="signupForm.controls.username" placeholder="Username" />
 
-    <div class="error border-box left" *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">
+    <div class="error border-box left" *ngIf="signupForm.get('password').hasError('required') && !signupForm.get('password').pristine">
       <span>Password is required.</span>
     </div>
     <input type="text" name="password" maxlength="40" minlength="8" class="left" type="password" [formControl]="signupForm.controls.password" placeholder="Password" />
 
-    <div class="error border-box left" *ngIf="signupForm.get('confirmPassword').hasError('required') && signupForm.get('confirmPassword').touched">
+    <div class="error border-box left" *ngIf="signupForm.get('confirmPassword').hasError('required') && !signupForm.get('confirmPassword').pristine">
       <span>Confirmation password is required.</span>
     </div>
     <input type="text" name="confirmPassword" maxlength="40" minlength="8" class="left" type="password" [formControl]="signupForm.controls.confirmPassword" placeholder="Confirm Password" />

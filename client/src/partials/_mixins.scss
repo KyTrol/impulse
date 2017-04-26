@@ -1,0 +1,4 @@
+@mixin validation-border($color) {
+  border-left: .3em solid $color;
+  border-right: .3em solid $color;
+}
