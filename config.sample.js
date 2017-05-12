@@ -3,6 +3,8 @@ const config = {
 
   development: {
 
+    env: "development",
+
     mongodb: {
       "host": "mongodb://localhost:27017/impulse",
       "username": "",
@@ -17,8 +19,27 @@ const config = {
     }
 
 
-  }
+  },
 
+  production: {
+
+    env: "production",
+
+    mongodb: {
+      host: "mongodb://localhost:27017/impulse",
+      username: "",
+      password: ""
+    },
+
+    session: {
+      secret: "super secret session secret",
+      resave: false,
+      saveUninitialized: false,
+      httpOnly: true,
+    }
+
+
+  }
 
 };
 
