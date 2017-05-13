@@ -82,6 +82,8 @@ class UserController {
         }
 
       });
+    } else {
+      utils.sendBadRequest(res, 'Missing parameters');
     }
 
   }

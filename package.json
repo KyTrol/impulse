@@ -6,7 +6,7 @@
     "build": "node ./build.js",
     "start-server": "node ./bin/www",
     "start": "npm run build && node ./bin/www",
-    "test": "mocha ./test/*.js ./test/**/*.js"
+    "test": "mocha ./spec/*.js ./spec/**/*.js"
   },
   "dependencies": {
     "@angular/cli": "^1.0.0",
@@ -26,6 +26,7 @@
     "node-mocks-http": "^1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "sinon": "^2.2.0"
   }
 }

@@ -1,10 +1,10 @@
 const utils = require('../../controllers/utils.js');
-const should = require('chai').should();
+const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
 
-describe('Testing controllers/utils.js', function() {
+describe('controllers/utils', function() {
 
-  describe('#sendInternalServerError', function() {
+  describe('.sendInternalServerError()', function() {
 
     it('should set the response status to 500', function() {
 
@@ -12,7 +12,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendInternalServerError(response);
 
-      response.statusCode.should.be.equal(500);
+      expect(response.statusCode).to.equal(500);
 
     });
 
@@ -22,7 +22,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendInternalServerError(response);
 
-      response._getData().should.have.property('errorMessage');
+      expect(response._getData().errorMessage).to.exist;
 
     });
 
@@ -32,7 +32,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendInternalServerError(response);
 
-      response._getData().errorMessage.should.be.equal('Internal server error.');
+      expect(response._getData().errorMessage).to.equal('Internal server error.');
 
     });
 
@@ -42,13 +42,13 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendInternalServerError(response);
 
-      response._isEndCalled().should.be.equal(true);
+      expect(response._isEndCalled()).to.equal(true);
 
     });
 
   });
 
-  describe('#sendBadRequest', function() {
+  describe('.sendBadRequest()', function() {
 
     it('should set the response status to 400', function() {
 
@@ -56,7 +56,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendBadRequest(response, 'foobar');
 
-      response.statusCode.should.be.equal(400);
+      expect(response.statusCode).to.equal(400);
 
     });
 
@@ -66,7 +66,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendBadRequest(response, 'foobar');
 
-      response._getData().should.have.property('errorMessage');
+      expect(response._getData().errorMessage).to.exist;
 
     });
 
@@ -76,7 +76,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendBadRequest(response, 'foobar');
 
-      response._getData().errorMessage.should.be.equal('foobar');
+      expect(response._getData().errorMessage).to.equal('foobar');
 
     });
 
@@ -86,7 +86,7 @@ describe('Testing controllers/utils.js', function() {
 
       utils.sendBadRequest(response, 'foobar');
 
-      response._isEndCalled().should.be.equal(true);
+      expect(response._isEndCalled()).to.equal(true);
 
     });
 
