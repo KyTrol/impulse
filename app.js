@@ -1,3 +1,5 @@
+'use strict';
+
 const config = require('./config.js').get(process.env.NODE_ENV);
 const express = require('express');
 const expressSession = require('express-session');

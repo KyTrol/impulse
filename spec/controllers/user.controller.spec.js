@@ -204,9 +204,53 @@ describe('UserController', function() {
 
   describe('.getUser()', function() {
 
+	  it('should call utils.sendBadRequest if username not given', function() {
+
+	  });
+
+	  it('should send a 404 if the requested user does not exist.', function() {
+
+	  });
+
+	  it('should send an errorMessage of \'User not found.\ if requested user does not exist', function() {
+
+	  });
+
+	  it('should send the requested user if the user does exist.', function() {
+
+	  });
+
   });
 
   describe('.updateInfo()', function() {
+
+	  it('should call utils.sendBadRequest if firstName missing from body', function() {
+
+	  });
+
+	  it('should call utils.sendBadRequest if lastName missing from body', function() {
+
+	  });
+
+	  it('should call utils.sendBadRequest if bio missing from body', function() {
+
+	  });
+
+	  it('should call utils.sendBadRequest if url missing from body', function() {
+
+	  });
+
+	  it('should call User.updateInfo', function() {
+
+	  });
+
+	  it('should return the updated user info if the update was successfull', function() {
+
+	  });
+
+	  it('should call utils.sendInternalServerError if an exception if caught', function() {
+
+	  });
 
   });
 
