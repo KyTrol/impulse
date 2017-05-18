@@ -9,9 +9,9 @@ describe('UserController', function() {
 
   describe('.login()', function() {
 
-    var request;
-    var response;
-    var userController;
+    let request;
+    let response;
+    let userController;
 
     beforeEach(function() {
 
@@ -65,9 +65,9 @@ describe('UserController', function() {
 
   describe('.logout()', function() {
 
-    var request;
-    var response;
-    var userController;
+    let request;
+    let response;
+    let userController;
 
     beforeEach(function() {
 
@@ -102,14 +102,16 @@ describe('UserController', function() {
 
   describe('.signup()', function() {
 
-    var request;
-    var response;
-    var userController;
-    var sendBadRequest;
-    var sendInternalServerError;
+    let request;
+    let response;
+    let userController;
+    let sendBadRequest;
+    let sendInternalServerError;
+    let userFindByUserName;
 
     beforeEach(function() {
 
+      userFindByUserName = sinon.stub(User, "findByUsername");
       response = httpMocks.createResponse();
       request = httpMocks.createRequest();
       userController = new UserController();
@@ -122,6 +124,7 @@ describe('UserController', function() {
 
       utils.sendBadRequest.restore();
       utils.sendInternalServerError.restore();
+      userFindByUserName.restore();
 
     });
 
@@ -178,6 +181,15 @@ describe('UserController', function() {
       expect(sendBadRequest.calledOnce).to.equal(true);
 
     });
+
+	it('should call User.signup if all parameters are valid', function() {
+
+      request.body = { firstName: "", lastName: "", username: "", password: "foo", confirmPassword: "foo" };
+      userController.signup(request, response);
+
+      expect(userFindByUserName.calledOnce).to.equal(true);
+
+	});
 
     it('should call utils.sendInternalServerError if User.findByUsername throws an exception', function() {
 
