@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-color: $grey-700;
+  background-color: $grey-800;
   color: $grey-100;
   font-family: 'Rubik', sans-serif;
   margin: 0;
@@ -13,9 +13,9 @@ body {
 
 .capital { text-transform: uppercase; }
 
-.center { text-align: center; };
-.right { text-align: right; };
-.left { text-align: left; };
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
 
 .block-center {
   margin-left: auto;
@@ -30,12 +30,16 @@ input,
 textarea {
   background-color: $grey-50;
   border: 0;
-  color: $grey-700;
+  color: $grey-800;
   padding: .4rem .4rem .4rem .8rem;
 }
 
 a {
   color: $pink;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   &:visited {
     color: $dark-pink;
@@ -45,11 +49,11 @@ a {
 
 .heading {
   font-weight: $light;
-  letter-spacing: 2px;
+  letter-spacing: .2rem;
 }
 
 .shadow {
-  box-shadow: $shadow
+  box-shadow: $shadow;
 }
 
 [disabled] {

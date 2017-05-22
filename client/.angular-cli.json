@@ -21,8 +21,7 @@
       "styles": [
         "partials/_normalize.scss",
         "styles.scss",
-        "partials/_rubik.scss",
-        "partials/_material-icons.scss"
+        "partials/_rubik.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
