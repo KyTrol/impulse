@@ -1,50 +1,50 @@
-var config = require("../config.sample.js");
-var should = require('chai').should();
+const config = require('../config.sample.js');
+const should = require('chai').should();
 
-describe("Testing config.js", function() {
+describe('Testing config.js', () => {
 
-  describe("#get()", function() {
+  describe('#get()', () => {
 
-    it("should return development when 'development' passed in", function() {
+    it('should return development when "development" passed in', () => {
 
-      const devConfig = config.get("development");
+      const devConfig = config.get('development');
 
       devConfig.should.not.be.equal(undefined);
-      devConfig.should.have.property("env");
-      devConfig.env.should.be.equal("development");
+      devConfig.should.have.property('env');
+      devConfig.env.should.be.equal('development');
 
     });
 
-    it ("should return production when 'production' is passed in", function() {
+    it('should return production when "production" is passed in', () => {
 
-      const prodConfig = config.get("foobar");
+      const prodConfig = config.get('foobar');
 
       prodConfig.should.not.be.equal(undefined);
-      prodConfig.should.have.property("env");
-      prodConfig.env.should.be.equal("development");
+      prodConfig.should.have.property('env');
+      prodConfig.env.should.be.equal('development');
 
     });
 
-    it ("should return development when a nonexistent env identifier is passed in", function() {
+    it('should return development when a nonexistent env identifier is passed in', () => {
 
-      const devConfig = config.get("foobar");
+      const devConfig = config.get('foobar');
 
       devConfig.should.not.be.equal(undefined);
-      devConfig.should.have.property("env");
-      devConfig.env.should.be.equal("development");
+      devConfig.should.have.property('env');
+      devConfig.env.should.be.equal('development');
 
     });
 
-    it("should return development when nothing is passed in", function() {
+    it('should return development when nothing is passed in', () => {
 
       const devConfig = config.get();
 
       devConfig.should.not.be.equal(undefined);
-      devConfig.should.have.property("env");
-      devConfig.env.should.be.equal("development");
+      devConfig.should.have.property('env');
+      devConfig.env.should.be.equal('development');
 
     });
 
-  })
+  });
 
 });

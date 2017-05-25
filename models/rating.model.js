@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const dbConnection = require('../db/db.js').get();
 const User = require('./user.model.js');
-const Schema = mongoose.Schema;
 const ObjectId = require('mongoose').Types.ObjectId;
+
+const Schema = mongoose.Schema;
 
 const RatingSchema = new Schema({
   review: {
@@ -28,23 +29,35 @@ const RatingSchema = new Schema({
   }
 });
 
-RatingSchema.statics.getRatingsFor = function(userId) {
+RatingSchema.statics.getRatingsFor = function (userId) {
+
   return this.find({
-      reviewedUser: new Object(userId)
-    })
-    .populate('reviewingUser reviewedUser')
-    .exec();
+
+    reviewedUser: {
+      userId
+    }
+
+  })
+  .populate('reviewingUser reviewedUser')
+  .exec();
+
 };
 
-RatingSchema.statics.getRatingsBy = function(userId) {
+RatingSchema.statics.getRatingsBy = function (userId) {
+
   return this.find({
-      reviewingUser: new Object(userId)
-    })
-    .populate('reviewingUser reviewedUser')
-    .exec();
+
+    reviewingUser: {
+      userId
+    }
+
+  })
+  .populate('reviewingUser reviewedUser')
+  .exec();
+
 };
 
-RatingSchema.statics.insertRating = function(rating) {
+RatingSchema.statics.insertRating = function (rating) {
 
   const schema = this;
 
@@ -52,7 +65,7 @@ RatingSchema.statics.insertRating = function(rating) {
     reviewedUser: new ObjectId(rating.reviewedUser),
     reviewingUser: new ObjectId(rating.reviewingUser)
   }, {
-    '$set': {
+    $set: {
       rating: rating.rating,
       review: rating.review
     }
@@ -61,11 +74,13 @@ RatingSchema.statics.insertRating = function(rating) {
     new: true,
     runValidators: true,
     setDefaultsOnInsert: true
-  }).populate('reviewedUser').populate('reviewingUser').exec().then(function(savedRating) {
+  }).populate('reviewedUser').populate('reviewingUser').exec()
+  .then((savedRating) => {
 
     schema.where({
       reviewedUser: savedRating.reviewedUser._id
-    }).count().then(count => {
+    }).count().then((count) => {
+
       const newAverage = calculateAverage(
         count,
         savedRating.reviewedUser.avgRating,
@@ -74,24 +89,31 @@ RatingSchema.statics.insertRating = function(rating) {
       );
 
       User.update({
-          _id: savedRating.reviewedUser._id
-        }, {
-          '$set': {
-            avgRating: newAverage
-          }
-        })
-        .exec().then(val => {
-          console.log('Returned from user update:', val);
-        });
+        _id: savedRating.reviewedUser._id
+      }, {
+        $set: {
+          avgRating: newAverage
+        }
+      })
+      .exec().then((val) => {
+
+        console.log('Returned from user update:', val);
+
+      });
+
     });
 
     return rating;
+
   });
+
 };
 
 function calculateActualRating(newRating, userAvarage) {
+
   const scale = (userAvarage - 5) * 0.06666;
   return (newRating * (1 + scale));
+
 }
 
 function calculateAverage(count, average, newVal, raterAverage) {
@@ -99,12 +121,18 @@ function calculateAverage(count, average, newVal, raterAverage) {
   average = average < 0 ? 0 : average;
 
   if (raterAverage <= 5) {
+
     return average + ((newVal - average) / (count + 1));
+
   } else if (raterAverage <= 20) {
+
     const scale = (newVal - 5) * 0.06666;
     return average + (((newVal * (1 + scale)) - average) / (count + 1));
+
   } else {
+
     console.error('What?');
+
   }
 
 }
