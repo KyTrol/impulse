@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
   public submitted = false;
   public errorMsg: String;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -28,16 +29,16 @@ export class SignupComponent implements OnInit {
   signup(values) {
 
     this.userService.signup(values.firstName, values.lastName, values.username, values.password, values.confirmPassword)
-        .subscribe(user => {
-          console.log(user);
-        },
-        this.handleSignInError
-      );
-
+      .subscribe(user => {
+        console.log(user);
+        this.userService.login(user.username, values.password)
+          .subscribe(() => this.router.navigate([`/profile/${user.username}`]));
+      },
+      this.handleSignInError
+    );
   }
 
   handleSignInError(err): void {
     this.errorMsg = 'Error occured while attempting to sign up.';
   }
-
 }
