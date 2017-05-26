@@ -53,10 +53,18 @@ const UserSchema = new Schema({
   }
 }, {
   toObject: {
-    transform: (doc, ret) => delete ret.password
+    transform(doc, ret) {
+
+      delete ret.password;
+
+    }
   },
   toJSON: {
-    transform: (doc, ret) => delete ret.password
+    transform(doc, ret) {
+
+      delete ret.password;
+
+    }
   }
 });
 
@@ -143,7 +151,7 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
 };
 
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function (next) {
 
   const user = this;
 

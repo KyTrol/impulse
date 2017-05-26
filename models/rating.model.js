@@ -31,13 +31,7 @@ const RatingSchema = new Schema({
 
 RatingSchema.statics.getRatingsFor = function (userId) {
 
-  return this.find({
-
-    reviewedUser: {
-      userId
-    }
-
-  })
+  return this.find({ reviewedUser: userId })
   .populate('reviewingUser reviewedUser')
   .exec();
 
@@ -45,13 +39,7 @@ RatingSchema.statics.getRatingsFor = function (userId) {
 
 RatingSchema.statics.getRatingsBy = function (userId) {
 
-  return this.find({
-
-    reviewingUser: {
-      userId
-    }
-
-  })
+  return this.find({ reviewingUser: userId })
   .populate('reviewingUser reviewedUser')
   .exec();
 
