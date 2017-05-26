@@ -1,40 +1,40 @@
-let express = require('express');
-let router = express.Router();
-const UserController = require('../../controllers/user.controller.js');
+const express = require('express');
+const UserController = require('../../controllers/user.controller');
+
+const router = express.Router();
 
 module.exports = (passport) => {
 
-  let controller = new UserController();
-
   router.post('/login',
     passport.authenticate('local'),
-    controller.login
+    UserController.login
   );
 
   router.get('/logout',
     isLoggedIn,
-    controller.logout
+    UserController.logout
   );
 
   router.get('/auth',
     isLoggedIn,
-    controller.login
+    UserController.login
   );
 
   router.post('/signup',
-    controller.signup
+    UserController.signup
   );
 
   router.post('/update',
-    controller.updateInfo
+    UserController.updateInfo
   );
 
   router.get('/:username',
     isLoggedIn,
-    controller.getUser
+    UserController.getUser
   );
 
   return router;
+
 };
 
 function isLoggedIn(req, res, next) {
@@ -43,9 +43,11 @@ function isLoggedIn(req, res, next) {
   console.log('Is logged in:', req.isAuthenticated());
 
   if (req.isAuthenticated()) {
+
     return next();
-  } else {
-    res.sendStatus(401);
+
   }
+
+  res.sendStatus(401);
 
 }

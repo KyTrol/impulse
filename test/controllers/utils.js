@@ -1,13 +1,13 @@
-var utils = require("../controllers/utils.js");
-var should = require('chai').should();
+// const utils = require('../controllers/utils.js');
+const should = require('chai').should();
 
-describe("Testing controllers/utils.js", function() {
+describe('Testing controllers/utils.js', () => {
 
-  describe("#sendInternalServerError", function() {
+  describe('#sendInternalServerError', () => {
 
   });
 
-  describe("#sendBadRequest", function() {
+  describe('#sendBadRequest', () => {
 
   });
 

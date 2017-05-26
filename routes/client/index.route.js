@@ -1,11 +1,13 @@
-let express = require('express');
-let path = require('path');
-let router = express.Router();
+const express = require('express');
+const path = require('path');
 
+const router = express.Router();
 const dist = '../../client/dist';
 
-let sendIndex = (req, res) => {
+const sendIndex = (req, res) => {
+
   res.sendFile(path.join(__dirname, dist, 'index.html'));
+
 };
 
 router.get('/', sendIndex);

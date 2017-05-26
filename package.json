@@ -6,7 +6,7 @@
     "build": "node ./build.js",
     "start-server": "node ./bin/www",
     "start": "npm run build && node ./bin/www",
-    "lint": "eslint *.js  **/*.js",
+    "lint": "eslint .",
     "test": "mocha"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbConnection = require('../db/db.js').get();
+const dbConnection = require('../db/db').get();
 const ObjectId = require('mongoose').Types.ObjectId; // eslint-disable-line
 const bcrypt = require('bcrypt');
 
@@ -53,18 +53,10 @@ const UserSchema = new Schema({
   }
 }, {
   toObject: {
-    transform: (doc, ret) => {
-
-      delete ret.password;
-
-    }
+    transform: (doc, ret) => delete ret.password
   },
   toJSON: {
-    transform: (doc, ret) => {
-
-      delete ret.password;
-
-    }
+    transform: (doc, ret) => delete ret.password
   }
 });
 
@@ -77,17 +69,12 @@ UserSchema.statics.login = function (username, password) {
 
     if (user) {
 
-      return user.comparePassword(password).then((isMatch) => {
-
-        return isMatch ? stripPassword(user) : null;
-
-      });
-
-    } else {
-
-      return Promise.resolve(null);
+      return user.comparePassword(password)
+      .then(isMatch => isMatch ? stripPassword(user) : null);
 
     }
+
+    return Promise.resolve(null);
 
   });
 
@@ -96,9 +83,9 @@ UserSchema.statics.login = function (username, password) {
 UserSchema.statics.signup = function (user) {
 
   user.username = user.username.toLowerCase();
-  return user.save().then((user) => {
+  return user.save().then((savedUser) => {
 
-    const newUser = stripPassword(user);
+    const newUser = stripPassword(savedUser);
     return stripPassword(newUser);
 
   });
@@ -115,11 +102,9 @@ UserSchema.statics.findByUsername = function (username) {
 
       return stripPassword(user);
 
-    } else {
-
-      return null;
-
     }
+
+    return null;
 
   });
 
@@ -192,11 +177,9 @@ function stripPassword(user) {
     delete user.password;
     return user;
 
-  } else {
-
-    return null;
-
   }
+
+  return null;
 
 }
 

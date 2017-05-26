@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const dbConnection = require('../db/db.js').get();
-const User = require('./user.model.js');
+const dbConnection = require('../db/db').get();
+const User = require('./user.model');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const Schema = mongoose.Schema;
@@ -109,12 +109,12 @@ RatingSchema.statics.insertRating = function (rating) {
 
 };
 
-function calculateActualRating(newRating, userAvarage) {
+/* function calculateActualRating(newRating, userAvarage) {
 
   const scale = (userAvarage - 5) * 0.06666;
   return (newRating * (1 + scale));
 
-}
+} */
 
 function calculateAverage(count, average, newVal, raterAverage) {
 
@@ -129,11 +129,9 @@ function calculateAverage(count, average, newVal, raterAverage) {
     const scale = (newVal - 5) * 0.06666;
     return average + (((newVal * (1 + scale)) - average) / (count + 1));
 
-  } else {
-
-    console.error('What?');
-
   }
+
+  console.error('What?');
 
 }
 

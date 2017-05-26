@@ -1,67 +1,78 @@
-const Rating = require('../models/rating.model.js');
-const utils = require('./utils.js');
+const Rating = require('../models/rating.model');
+const utils = require('./utils');
 
 class RatingController {
 
-  rate(req, res, err) {
-    if (req.body.rating && !isNaN(req.body.rating) && req.body.reviewingUser && req.body.reviewedUser) {
+  static rate(req, res, err) {
+
+    if (req.body.rating && !isNaN(req.body.rating) && req.body.reviewingUser && req.body.reviewedUser) { // eslint-disable-line
+
       const rating = new Rating({
-       rating: req.body.rating,
-       reviewingUser: req.body.reviewingUser,
-       reviewedUser: req.body.reviewedUser,
-       review: req.body.review || null
+        rating: req.body.rating,
+        reviewingUser: req.body.reviewingUser,
+        reviewedUser: req.body.reviewedUser,
+        review: req.body.review || null
       });
 
-      Rating.insertRating(rating).then(rating => {
-        res.send(rating);
-      }).catch(err => {
-       console.error('error', err);
-       utils.sendInternalServerError(res);
+      Rating.insertRating(rating)
+      .then(savedRating => res.send(savedRating))
+      .catch((err) => {
+
+        console.error('error', err);
+        utils.sendInternalServerError(res);
+
       });
+
     } else {
+
       utils.sendBadRequest(res, 'Missing parameters.');
+
     }
 
   }
 
-  getRatingsFor(req, res, err) {
+  static getRatingsFor(req, res, err) {
+
     if (req.params.userId) {
 
-      Rating.getRatingsFor(req.params.userId).then(ratings => {
-        if (ratings) {
-          res.send(ratings);
-        } else {
-          res.send([]);
-        }
-      }).catch(err => {
+      Rating.getRatingsFor(req.params.userId)
+      .then(ratings => ratings ? res.send(ratings) : res.send([]))
+      .catch((err) => {
+
         console.error('error', err);
         utils.sendInternalServerError(res);
+
       });
 
     } else {
+
       utils.sendBadRequest(res, 'Missing user id.');
+
     }
+
   }
 
-  getRatingsBy(req, res, err) {
+  static getRatingsBy(req, res, err) {
+
     if (req.params.userId) {
-      Rating.getRatingsBy(req.params.userId).then(ratings => {
-        if (ratings) {
-          res.send(ratings);
-        } else {
-          res.send([]);
-        }
-      }).catch(err => {
+
+      Rating.getRatingsBy(req.params.userId)
+      .then(ratings => ratings ? res.send(ratings) : res.send([]))
+      .catch((err) => {
+
         console.error('error', err);
         utils.sendInternalServerError(res);
+
       });
 
     } else {
+
       utils.sendBadRequest(res, 'Missing user id.');
+
     }
+
   }
 
 }
 
-
-module.exports = RatingController
+module.exports = RatingController;

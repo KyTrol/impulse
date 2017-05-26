@@ -1,4 +1,4 @@
-const config = require('./config.js').get(process.env.NODE_ENV);
+const config = require('./config').get(process.env.NODE_ENV);
 const express = require('express');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
@@ -10,8 +10,8 @@ const helmet = require('helmet');
 
 const app = express();
 
-const dbConnection = require('./db/db.js').get();
-const passport = require('./passport.config.js');
+const dbConnection = require('./db/db').get();
+const passport = require('./passport.config');
 
 app.use(logger('dev'));
 app.use(helmet());
@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const router = require('./routes/router.js')(passport);
+const router = require('./routes/router')(passport);
 
 const node_modules = './client/node_modules'; // eslint-disable-line
 const dist = './client/dist';

@@ -1,9 +1,9 @@
 const User = require('../models/user.model');
-const utils = require('./utils.js');
+const utils = require('./utils');
 
 class UserController {
 
-  login(req, res, err) {
+  static login(req, res, err) {
 
     if (req.user) {
 
@@ -20,45 +20,47 @@ class UserController {
 
   }
 
-  logout(req, res, err) {
+  static logout(req, res, err) {
 
     req.logout();
     res.sendStatus(200);
 
   }
 
-  signup(req, res, err) {
+  static signup(req, res, err) {
 
-    if (req.body.firstName && req.body.lastName && req.body.username && req.body.password && req.body.confirmPassword) {
+    if (req.body.firstName && req.body.lastName && req.body.username && req.body.password && req.body.confirmPassword) { // eslint-disable-line
 
       if (req.body.password === req.body.confirmPassword) {
 
-        //const whiteList = /[^a-zA-Z0-9]/g;
+        // const whiteList = /[^a-zA-Z0-9]/g;
 
-        User.findByUsername(req.body.username).then(function(user) {
+        User.findByUsername(req.body.username).then((user) => {
 
           if (!user) {
 
-            const user = new User({
+            const newUser = new User({
               firstName: req.body.firstName,
               lastName: req.body.lastName,
               username: req.body.username.toLowerCase(),
               password: req.body.password
             });
 
-            User.signup(user).then(user => {
-              res.send(user);
-            }).catch(function(err) {
+            User.signup(newUser)
+            .then(registeredUser => res.send(registeredUser))
+            .catch((err) => {
+
               console.error(err);
               utils.sendInternalServerError(res);
-            })
 
-            /*user.save().then(function(user) {
+            });
+
+            /* user.save().then(function(user) {
                 res.send(user);
             }).catch(function(err) {
                 console.error(err);
                 utils.sendInternalServerError(res);
-            });*/
+            }); */
 
           } else {
 
@@ -87,27 +89,32 @@ class UserController {
 
   }
 
-  getUser(req, res, err) {
+  static getUser(req, res, err) {
+
     const username = req.params.username.toLowerCase();
 
     if (username) {
-      User.findByUsername(username).then(user => {
+
+      User.findByUsername(username).then((user) => {
 
         if (user) {
+
           res.send(user);
+
         } else {
+
           res.status(404);
-          res.send({
-            errorMessage: 'User not found.'
-          });
+          res.send({ errorMessage: 'User not found.' });
+
         }
 
       });
+
     }
 
   }
 
-  updateInfo(req, res, err) {
+  static updateInfo(req, res, err) {
 
     if (req.body.firstName && req.body.lastName && req.body.bio && req.body.url) {
 
@@ -119,21 +126,23 @@ class UserController {
         url: req.body.url
       });
 
-      User.updateInfo(user).then(user => {
-        res.send(user);
-      }).catch(err => {
+      User.updateInfo(user)
+      .then(updatedUser => res.send(updatedUser))
+      .catch((err) => {
+
         console.error(err);
         utils.sendInternalServerError(res);
+
       });
 
     } else {
+
       utils.sendBadRequest(res, 'Missing parameters.');
+
     }
 
   }
 
 }
-
-
 
 module.exports = UserController;

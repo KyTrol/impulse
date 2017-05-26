@@ -1,4 +1,4 @@
-const config = require('../config.sample.js');
+const config = require('../config.sample');
 const should = require('chai').should();
 
 describe('Testing config.js', () => {

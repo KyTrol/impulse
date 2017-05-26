@@ -19,6 +19,7 @@ module.exports = {
     "no-shadow": ["error", { "allow": ["err"] }],
     "consistent-return": "off",
     "padded-blocks": ["error", "always"],
-    "no-console": "off"
+    "no-console": "off",
+    "no-confusing-arrow": "off"
   }
 };
