@@ -187,7 +187,7 @@ describe('UserController', function() {
       request.body = { firstName: "", lastName: "", username: "", password: "foo", confirmPassword: "foo" };
       userController.signup(request, response);
 
-      expect(userFindByUserName.calledOnce).to.equal(true);
+      expect(User.findByUsername.calledOnce).to.equal(true);
 
 	});
 
